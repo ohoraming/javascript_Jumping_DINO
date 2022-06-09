@@ -55,10 +55,11 @@ let cactuses = [];
 let jumping = false; // 일종의 스위치
 let jumptimer = 0;
 let animation;
+let score = 0;
 
 function execPerFrame() {
   animation = requestAnimationFrame(execPerFrame);
-	timer+=1; // frame마다 1씩 증가
+	timer+=3; // frame마다 1씩 증가
 
 	// frame마다 실행시킬 내용
 	ctx.clearRect(0, 0, canvas.width, canvas.height); // 잔상 지우기
@@ -79,8 +80,9 @@ function execPerFrame() {
 		// x좌표가 0미만이면 배열에서 제거
 		if (a.x < 0) {
 			o.splice(i, 1);
+			score += 10; // 장애물이 끝으로 가서 사라질 때 점수 올라감
 		}
-		a.x-=4;
+		a.x-=6;
 
     // 캐릭터와 모든 장애물의 충돌을 체크
     isCollision(dino, a);
@@ -88,22 +90,25 @@ function execPerFrame() {
 		a.draw();
 	});
 
+	const score = document.querySerlector('#score');
+	
+
 	dino.draw();
 
   // 점프 기능
 	if (jumping == true) {
-		dino.y-=8; // 캐릭터 올라감(숫자로 점프 속도 조절)
+		dino.y-=13; // 캐릭터 올라감(숫자로 점프 속도 조절)
 		jumptimer++; // frame마다 timer증가
     if (dino.y == 0) { // 캐릭터가 화면 상단끝에 닿으면
-      dino.y+=8; // 내려옴
+      dino.y+=13; // 내려옴
     }
 	}
 	if (jumping == false) { // key up되면 
     if (dino.y < 350) { // 이 높이보다 낮으면
-      dino.y+=7; // 캐릭터 내려감
+      dino.y+=9; // 캐릭터 내려감
     }
 	}
-	if (jumptimer > 35) {
+	if (jumptimer > 25) {
 		// 일정 시간 지나면
 		jumping = false; // 점핑 중단
     jumptimer = 0; // timer 리셋
