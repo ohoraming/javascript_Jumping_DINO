@@ -1,0 +1,17 @@
+html {
+	background: url(background.jpg) no-repeat center;
+	background-size: cover;
+	background-position: 100% 50%;
+}
+
+@font-face {
+  font-family: retro;
+  src: url(DungGeunMo.ttf);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  font-family: retro;
+  font-size: 2rem;
+}

@@ -6,6 +6,8 @@ canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
 // 기본 세팅
 
+const scoreEl = document.querySelector('#score');
+
 // 네모 그리기
 // ctx.fillStyle = 'green';
 // ctx.fillRect(10, 10, 100, 100);
@@ -22,12 +24,12 @@ img2.src = 'cactus.png'; // 장애물
 const dino = {
 	x: 40,
 	y: 350,
-	width: 80,
+	width: 70,
 	height: 150,
 	draw() {
 		ctx.fillStyle = "green";
 		ctx.fillRect(this.x, this.y, this.width, this.height); // x,y 지점에 이 사이즈로 네모 그리기(hitbox)
-    ctx.drawImage(img1, this.x-20, this.y, this.width * 1.5, this.height) // 이미지
+    ctx.drawImage(img1, this.x-20, this.y, this.width * 2, this.height) // 이미지
 	},
 };
 
@@ -38,13 +40,13 @@ class Cactus {
 	constructor() {
 		this.x = 1100;
 		this.y = 400;
-		this.width = 80;
+		this.width = 60;
 		this.height = 100;
 	}
 	draw() {
 		ctx.fillStyle = "red";
 		ctx.fillRect(this.x, this.y, this.width, this.height); // x,y 지점에 이 사이즈로 그리기(hitbox)
-    ctx.drawImage(img2, this.x, this.y, this.width, this.height); // 이미지
+    ctx.drawImage(img2, this.x-15, this.y, this.width * 1.5, this.height); // 이미지
 	}
 };
 
@@ -82,6 +84,7 @@ function execPerFrame() {
 		if (a.x < 0) {
 			o.splice(i, 1);
 			score += 10; // 장애물이 끝으로 가서 사라질 때 점수 올라감
+			scoreEl.textContent = `Score: ${score}`;
 		}
 		a.x-=6;
 
@@ -90,8 +93,6 @@ function execPerFrame() {
 
 		a.draw();
 	});
-
-	const score = document.querySelector('#score');
 
 	dino.draw();
 
