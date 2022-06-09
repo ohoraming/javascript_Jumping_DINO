@@ -11,7 +11,7 @@ canvas.height = window.innerHeight - 100;
 // ctx.fillRect(10, 10, 100, 100);
 
 // 이미지
-let img1 = new Image(50, 50,);
+let img1 = new Image();
 img1.src = 'dino.png'; // 캐릭터
 let img2 = new Image();
 img2.src = 'cactus.png'; // 장애물
@@ -22,14 +22,15 @@ img2.src = 'cactus.png'; // 장애물
 const dino = {
 	x: 40,
 	y: 350,
-	width: 70,
+	width: 80,
 	height: 150,
 	draw() {
 		ctx.fillStyle = "green";
-		// ctx.fillRect(this.x, this.y, this.width, this.height); // x,y 지점에 이 사이즈로 네모 그리기(hitbox)
-    ctx.drawImage(img1, this.x-30, this.y-5, img1.width*3, img1.height*3) // 이미지
+		ctx.fillRect(this.x, this.y, this.width, this.height); // x,y 지점에 이 사이즈로 네모 그리기(hitbox)
+    ctx.drawImage(img1, this.x-20, this.y, this.width * 1.5, this.height) // 이미지
 	},
 };
+
 dino.draw(); // 등장시키고 싶을 때 호출
 
 // 장애물
@@ -37,15 +38,15 @@ class Cactus {
 	constructor() {
 		this.x = 1100;
 		this.y = 400;
-		this.width = 60;
+		this.width = 80;
 		this.height = 100;
 	}
 	draw() {
 		ctx.fillStyle = "red";
-		// ctx.fillRect(this.x, this.y, this.width, this.height); // x,y 지점에 이 사이즈로 그리기(hitbox)
-    ctx.drawImage(img2, this.x-20, this.y, img2.width*0.2, img2.height*0.2); // 이미지
+		ctx.fillRect(this.x, this.y, this.width, this.height); // x,y 지점에 이 사이즈로 그리기(hitbox)
+    ctx.drawImage(img2, this.x, this.y, this.width, this.height); // 이미지
 	}
-}
+};
 
 // 애니메이션 만들기
 // 게임세상은 frame으로 움직임
@@ -90,8 +91,7 @@ function execPerFrame() {
 		a.draw();
 	});
 
-	const score = document.querySerlector('#score');
-	
+	const score = document.querySelector('#score');
 
 	dino.draw();
 
@@ -113,7 +113,7 @@ function execPerFrame() {
 		jumping = false; // 점핑 중단
     jumptimer = 0; // timer 리셋
 	}
-}
+};
 
 execPerFrame();
 
@@ -125,7 +125,7 @@ function isCollision(dino, cactus) {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // 잔상 지우기
     cancelAnimationFrame(animation);
   } 
-}
+};
 
 // space bar 누르면 캐릭터 점프
 document.addEventListener("keydown", (e) => {
